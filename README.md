@@ -1,3 +1,217 @@
+code import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.composeapp.R
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppNavigation()
+        }
+    }
+}
+
+@Composable
+fun AppNavigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "exploreBrands") {
+        composable("exploreBrands") { ExploreBrandsScreen(navController) }
+        // Add other composable routes here
+    }
+}
+
+@Composable
+fun ExploreBrandsScreen(navController: NavController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Explore Brands") },
+                navigationIcon = {
+                    IconButton(onClick = { /* Handle back navigation */ }) {
+                        Icon(imageVector = androidx.compose.material.icons.Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        },
+        bottomBar = {
+            BottomNavigation {
+                BottomNavigationItem(
+                    icon = { Icon(imageVector = androidx.compose.material.icons.Icons.Filled.ShoppingCart, contentDescription = "Shop") },
+                    label = { Text("Shop") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate("shop")
+                    }
+                )
+                BottomNavigationItem(
+                    icon = { Icon(imageVector = androidx.compose.material.icons.Icons.Filled.ShoppingBag, contentDescription = "Orders") },
+                    label = { Text("Orders") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate("orders")
+                    }
+                )
+                BottomNavigationItem(
+                    icon = { Icon(imageVector = androidx.compose.material.icons.Icons.Filled.CreditCard, contentDescription = "Cards") },
+                    label = { Text("Cards") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate("cards")
+                    }
+                )
+                BottomNavigationItem(
+                    icon = { Icon(imageVector = androidx.compose.material.icons.Icons.Filled.Person, contentDescription = "Account") },
+                    label = { Text("Account") },
+                    selected = false,
+                    onClick = {
+                        navController.navigate("account")
+                    }
+                )
+            }
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+        ) {
+            // Tab Buttons
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = { /* Handle click */ },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
+                ) {
+                    Text("All", color = Color.White)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { /* Handle click */ },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White)
+                ) {
+                    Text("New", color = Color.Black)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { /* Handle click */ },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White)
+                ) {
+                    Text("Popular", color = Color.Black)
+                }
+            }
+
+            // Brand Cards
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_apple),
+                        brandName = "Apple"
+                    )
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_zara),
+                        brandName = "Zara"
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_nike),
+                        brandName = "Apple"
+                    )
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_levi),
+                        brandName = "Zara"
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_samsung),
+                        brandName = "Samsung"
+                    )
+                    BrandCard(
+                        image = painterResource(id = R.drawable.ic_versace),
+                        brandName = "Versace"
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun BrandCard(image: Painter, brandName: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),
+        onClick = { /* Handle click */ }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(painter = image, contentDescription = null, modifier = Modifier.size(64.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(brandName, fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    ExploreBrandsScreen(navController = rememberNavController())
+}
+
+
 Step-by-Step Guide for Kotlin Android Development
  
 Step 1: Setup and Basics
