@@ -1,0 +1,174 @@
+
+class Student{
+    companion object{
+        val gender: String  = "Male";
+
+    }
+
+}
+
+
+//global Variable
+val name = "ahmed "
+
+
+
+
+
+
+fun main() {
+
+
+//    println("Hello World")
+//
+//    var student = Student() ; // we dont need any new key word like in java
+//
+//   var arr    =  arrayOf(1,2,34,5,66 )
+//    val array2  = arrayOf(1,2,3,"multiple")
+//    println(array2)
+//    println(arr)
+//    println(name)
+
+
+
+
+//    Local Variable and Global Variable and
+//    companian Object
+    println(Student.gender)
+
+
+//    Null Saftey in Kotlin
+
+//    Safe Call Operator
+
+}
+
+//    Null Saftey in Kotlin
+//    -In Kotlin, the safe call operator (?.) and the Elvis operator (?:) are two useful operators
+//    that help you deal with null values in a safe and concise way.
+
+
+//    var student:String = null ;  // gives warning {String cant take the null value directly}
+//    var student: String? = null ; // works
+
+//    println(student?.length) // safe call !
+//    println(student?.length ?: "THE VARIABLE is NULL") //Elvis Operator
+
+//    val name: String? = null
+//    println(name!!) // Will throw NullPointerException
+
+
+
+
+//  if else in KOTLIN
+    val a = 10 ;
+    val b =40 ;
+
+    if (a>b){
+        println("a is big")
+    }else{
+        println("$b:B is bigg")
+    }
+
+
+
+//    In Kotlin WHen is Similar to SwitchCASE
+
+    val result = 8 ;
+
+    when(result){
+        10 -> println("10rs")
+        20 -> println("20rs")
+        100 -> println("100rs")
+        in 6..10 -> println("The Result Found Bro ! ")
+        else -> println("Nothing Found bro ")
+    }
+
+
+
+
+
+//    val name: String? = null
+//    println(name!!) // Will throw NullPointerException
+
+
+
+//    LOOPS IN KOTLIN
+
+//    TRAVERSEL of An ARRAY
+//    val array = arrayOf(1,2,34,546,78)
+//    for (item in array){
+//        println(item)
+//    }
+
+//    printing range-----------------------------------
+//    for (i in 5..7){
+//        println(i)
+//    }
+
+//
+//    print("The Even Numbers are")
+//    for (i in 2..20){
+//        if (i % 2 == 0){
+//            println(i)
+//        }
+//    }
+
+//    what if i want to print the even numbers till 20 in reverse order
+//
+//    for (i in 20 downTo 2){
+//        if (i % 2 == 0){
+//            println(i)
+//        }
+//
+//    }
+
+
+//    while loop in kotlin
+//    var i = 0 ;
+//    while (i<10){
+//        print(i);
+//        i++
+//    }
+
+
+//    Multiple LOOPS
+//
+//    outer@ for (i in 1..5){
+//        inner@ for (j in 1..5){
+//            println("i is $i and j is $j");
+//            if (i==4 )break@inner
+//        }
+//    }
+
+//    Operators are two types ! Unary And Binary
+
+
+
+//    Functions in KOTLIN
+
+//    Function as expression
+
+//    fun printName(name:String) = println("The name is $name ")
+//    printName("Jubair")
+
+//    2. Named Parameter
+//    Just like Void in C/C++ ! We Have Unit in KOTLIN
+
+    fun calSum(a:Int, b:Int= 100){  //default Parameters
+        println("The Sum of $a and $b is ${a + b}")
+    }
+ calSum(b=10,a=20) // Sum of 20 and 10 is 30  //named parameters
+    calSum(10,309) //output : The Sum of 10 and 309 is 319 // the value of b is overidden !
+
+}
+
+//3. Lambda and higher order functions
+
+//HOC
+//whenever we need to pass a function as a parameter we will use HOC
+
+
+
+
+
